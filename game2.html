@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andor - Your Locals, On Demand</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="andor.png">
+    <!-- Meta Icons Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .app-container {
+            max-width: 414px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            position: relative;
+        }
+        .status-bar {
+            height: 44px;
+            background: #000;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e4e4e7;
+            padding: 12px 20px;
+            max-width: 414px;
+            margin: 0 auto;
+            backdrop-filter: blur(20px);
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        .nav-item.active {
+            color: #000;
+        }
+        .material-icons-round {
+            font-size: 24px;
+        }
+        .nav-item.active .material-icons-round {
+            font-weight: 600;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 8px 0;
+            border: 1px solid #e4e4e7;
+        }
+        .service-chip {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 10px 16px;
+            font-size: 14px;
+            margin: 4px;
+            color: #475569;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .service-chip.active {
+            background: #000;
+            color: white;
+            border-color: #000;
+        }
+        .pro-badge {
+            background: #dcfce7;
+            color: #166534;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="app-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div>9:41</div>
+            <div class="flex items-center space-x-1">
+                <span class="material-icons-round" style="font-size: 18px;">network_cell</span>
+                <span class="material-icons-round" style="font-size: 18px;">wifi</span>
+                <span class="material-icons-round" style="font-size: 18px;">battery_full</span>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="px-5 py-4 border-b border-gray-200 bg-white">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="andor.png" alt="Andor" class="h-10 w-10 rounded-xl">
+                    <div>
+                        <div class="text-lg font-bold text-gray-900">Andor</div>
+                        <div class="text-sm text-gray-500 flex items-center">
+                            <span class="material-icons-round text-base mr-1">location_on</span>
+                            Current location
+                        </div>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200">
+                        <span class="material-icons-round text-gray-700">notifications</span>
+                    </button>
+                    <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200">
+                        <span class="material-icons-round text-gray-700">person</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="p-5 space-y-5 pb-24">
+            <!-- Search Bar -->
+            <div class="card bg-white border-gray-200">
+                <div class="flex items-center space-x-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-200">
+                    <span class="material-icons-round text-gray-500">search</span>
+                    <input 
+                        type="text" 
+                        placeholder="What service do you need?" 
+                        class="flex-1 bg-transparent border-none focus:outline-none text-base placeholder-gray-500 font-medium"
+                    >
+                </div>
+            </div>
+
+            <!-- Quick Services -->
+            <div class="card bg-white border-gray-200">
+                <h2 class="text-lg font-bold text-gray-900 mb-4">Quick Services</h2>
+                <div class="flex flex-wrap -m-1">
+                    <button class="service-chip active">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons-round text-base">plumbing</span>
+                            <span>Plumbing</span>
+                        </div>
+                    </button>
+                    <button class="service-chip">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons-round text-base">cleaning_services</span>
+                            <span>Cleaning</span>
+                        </div>
+                    </button>
+                    <button class="service-chip">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons-round text-base">format_paint</span>
+                            <span>Painting</span>
+                        </div>
+                    </button>
+                    <button class="service-chip">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons-round text-base">electrical_services</span>
+                            <span>Electrical</span>
+                        </div>
+                    </button>
+                    <button class="service-chip">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons-round text-base">computer</span>
+                            <span>Tech Help</span>
+                        </div>
+                    </button>
+                    <button class="service-chip">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons-round text-base">cake</span>
+                            <span>Baking</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Nearby Pros -->
+            <div class="card bg-white border-gray-200">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-900">Available Nearby</h2>
+                    <button class="text-sm text-gray-700 font-semibold flex items-center">
+                        See all
+                        <span class="material-icons-round text-base ml-1">chevron_right</span>
+                    </button>
+                </div>
+                
+                <!-- Pro Card 1 -->
+                <div class="border border-gray-200 rounded-xl p-4 mb-4 hover:border-gray-300 transition-colors">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-14 h-14 bg-black rounded-xl flex items-center justify-center">
+                            <span class="material-icons-round text-white">plumbing</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="min-w-0">
+                                    <div class="font-bold text-gray-900 truncate">Mike's Plumbing</div>
+                                    <div class="text-sm text-gray-500 flex items-center space-x-2 mt-1">
+                                        <div class="flex items-center space-x-1">
+                                            <span class="material-icons-round text-amber-500 text-base">star</span>
+                                            <span>4.9</span>
+                                            <span>(247)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pro-badge flex items-center space-x-1">
+                                    <span class="material-icons-round text-base">flash_on</span>
+                                    <span>Online</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mt-3">
+                                <div class="flex items-center space-x-1">
+                                    <span class="material-icons-round text-base">schedule</span>
+                                    <span>15 min</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <span class="material-icons-round text-base">location_on</span>
+                                    <span>0.8 km</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <span class="material-icons-round text-base">payments</span>
+                                    <span>$50/hr</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-black text-white py-3.5 rounded-xl font-semibold mt-4 text-base hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2">
+                        <span class="material-icons-round text-lg">bolt</span>
+                        <span>BOOM NOW</span>
+                    </button>
+                </div>
+
+                <!-- Pro Card 2 -->
+                <div class="border border-gray-200 rounded-xl p-4 hover:border-gray-300 transition-colors">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center border border-gray-200">
+                            <span class="material-icons-round text-gray-700">cake</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="min-w-0">
+                                    <div class="font-bold text-gray-900 truncate">Sarah's Baking</div>
+                                    <div class="text-sm text-gray-500 flex items-center space-x-2 mt-1">
+                                        <div class="flex items-center space-x-1">
+                                            <span class="material-icons-round text-amber-500 text-base">star</span>
+                                            <span>4.8</span>
+                                            <span>(189)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pro-badge flex items-center space-x-1">
+                                    <span class="material-icons-round text-base">flash_on</span>
+                                    <span>Online</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mt-3">
+                                <div class="flex items-center space-x-1">
+                                    <span class="material-icons-round text-base">schedule</span>
+                                    <span>30 min</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <span class="material-icons-round text-base">location_on</span>
+                                    <span>1.2 km</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <span class="material-icons-round text-base">payments</span>
+                                    <span>$35/hr</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-black text-white py-3.5 rounded-xl font-semibold mt-4 text-base hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2">
+                        <span class="material-icons-round text-lg">bolt</span>
+                        <span>BOOM NOW</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav bg-white/95">
+            <div class="flex justify-between items-center">
+                <div class="nav-item active">
+                    <span class="material-icons-round">home</span>
+                    <span>Home</span>
+                </div>
+                <div class="nav-item">
+                    <span class="material-icons-round">explore</span>
+                    <span>Explore</span>
+                </div>
+                <div class="nav-item">
+                    <span class="material-icons-round">calendar_today</span>
+                    <span>Bookings</span>
+                </div>
+                <div class="nav-item">
+                    <span class="material-icons-round">chat</span>
+                    <span>Messages</span>
+                </div>
+                <div class="nav-item">
+                    <span class="material-icons-round">person</span>
+                    <span>Profile</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
